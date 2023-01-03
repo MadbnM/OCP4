@@ -34,11 +34,17 @@ In a slightly different test where ES was deployed on EBS storage class, resulte
 
 OpenShift Container Storage does not exhibit this behavior as it supports cross-AZ persistent storage, which can withstand a variety of infrastructure failure scenarios as mentioned in Appendix Table 12. In the public cloud OpenShift environment, OpenShift Container Storage nodes are deployed in multi-availability zones within a region, forming a distributed and highly available storage cluster. As such storage provisioned by OpenShift Container Storage is available across availability zones and can seamlessly handle failure of AZs without losing data or impacting application service availability, helping applications consuming OpenShift Container Storage storage enjoy higher resiliency.
 
+![image](https://user-images.githubusercontent.com/81707384/210451167-cf01c15e-2c50-4a41-acb0-a0db89ee27f4.png)
+
+
 Chart 1: Elasticsearch workload characterization steady vs degraded state
 Chart 1: Elasticsearch workload characterization steady vs degraded state
 
 Why choose OpenShift Container Storage for OpenShift Logging Service
 Whether you choose to deploy OpenShift on-premise or in the public cloud, you require persistent storage to aggregate the logs from your OpenShift Container Platform cluster, such as node system logs, application container logs, and so forth. OpenShift cluster logging component logStore implements Elasticsearch to store and index the logs for an OpenShift cluster.
+
+![image](https://user-images.githubusercontent.com/81707384/210451190-f3d16c28-1c8f-47a7-ae84-005335ca8aeb.png)
+
 
 Table 3 summarizes the comparison between the current default storage (emptyDir), OpenShift Container Storage and AWS EBS for OpenShift Logging Service.
 
@@ -49,13 +55,20 @@ OpenShift Logging is a key service of the OpenShift Container Platform monitorin
 
 As summarized in Table 4, Multi availability-zone storage resiliency, multi interface support as well as a common storage experience across infrastructure types are some of the most prominent features of OpenShift Container Storage, which makes it ideal for being used as the preferred storage backend for OpenShift logging service.
 
+![image](https://user-images.githubusercontent.com/81707384/210451244-197e51c6-c42b-4b96-9657-e5c6a4f68c10.png)
+
 Table 4 : Storage options comparison for OpenShift Logging Service across infrastructure
 Table 4 : Storage options comparison for OpenShift Logging Service across infrastructure
 Appendix
 Benchmarking Environment
 The benchmarking environment consists of one OpenShift cluster configured with OpenShift Container Storage and EBS storage classes. To test Elasticsearch on different storage classes, we created two OpenShift projects one for ES on OpenShift Container Storage storage class and ES on EBS storage classes. For workload generation, we used the Rally tool running within each OpenShift project. The following tables further describe the benchmarking environment.
 
+![image](https://user-images.githubusercontent.com/81707384/210451269-6e5e3b05-8241-41fb-b730-eef8e341a465.png)
+
 Tables 5 through 7
+
+![image](https://user-images.githubusercontent.com/81707384/210451292-164c72ef-9809-4e90-b0a3-3eb667546632.png)
+
 Figure 1: Red Hat OpenShift Cluster Logging powered by OpenShift Container Storage
 Figure 1: Red Hat OpenShift Cluster Logging powered by OpenShift Container Storage
 Benchmark Overview
@@ -68,6 +81,8 @@ ES Resiliency: Ability of Elasticsearch to withstand certain types of failure an
 
 ES Reliability: In case of failure, it's the ability of Elasticsearch service to remain functional from consumer perspective (higher the better).
 
+![image](https://user-images.githubusercontent.com/81707384/210451311-8da8b60c-0a88-4d0d-a543-3c4044191c25.png)
+
 Table 8: Feature comparison matrix for choosing the optimal storage for Openshift Cluster Logging (Elasticsearch)
 Table 8: Feature comparison matrix for choosing the optimal storage for Openshift Cluster Logging (Elasticsearch)
 
@@ -76,12 +91,17 @@ The goal of this study was to understand the resiliency characteristics of the E
 
 In the remaining time, we ran a basic test to understand the performance penalty imposed by different Elasticsearch native redundancy levels. We did not intend to stress test the Elasticsearch cluster or storage subsystem with this test. Chart 2 describes the performance of Elasticsearch at different redundancy levels when a single client workload was applied. We did not observe any bottleneck on the storage subsystem as well as on Elasticsearch cluster resources.
 
+![image](https://user-images.githubusercontent.com/81707384/210451323-d14106da-85be-4d16-a389-c4faec709e9a.png)
+
 Chart 2: Comparing elasticsearch redundancy level performance
 Chart 2: Comparing Elasticsearch redundancy level performance
 
 Miscellaneous details
 Table 7 summarizes the recommended and configurable storage technologies for OpenShift Container Platform hosted logging service and Table 8 describes different policy types that could be specified in Custom Resource Definition (CRD) to provide data redundancy and resilience to failure.
+![image](https://user-images.githubusercontent.com/81707384/210451347-ddb063f0-0715-4fe8-9e68-c0060421319f.png)
 
 Tables 9 and 10
 Table 9 describes the rating reference used to compare different test results and Table 10 lists possible degraded state scenarios that could trigger degradation in the Elasticsearch cluster’s health.
+![image](https://user-images.githubusercontent.com/81707384/210451354-e74a92d2-d645-4860-8b17-e37e7d2453cd.png)
+
 Tables 11 & 12
