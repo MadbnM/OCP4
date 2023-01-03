@@ -105,3 +105,7 @@ Table 9 describes the rating reference used to compare different test results an
 ![image](https://user-images.githubusercontent.com/81707384/210451354-e74a92d2-d645-4860-8b17-e37e7d2453cd.png)
 
 Tables 11 & 12
+
+### NFS Workaround for ElasticSearch
+
+https://access.redhat.com/articles/2966031
